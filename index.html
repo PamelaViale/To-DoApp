@@ -3,9 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>ToDO App</title>
 </head>
 <body>
-    
+      <h1>Mi Lista de Tareas</h1>
+
+
+  <form id="formulario">
+    <input type="text" id="tarea" placeholder="Escribe una tarea">
+    <select id="categoria">
+      <option value="Trabajo">Trabajo</option>
+      <option value="Estudio">Estudio</option>
+      <option value="Personal">Personal</option>
+    </select>
+    <button type="submit">Agregar</button>
+  </form>
+
+
+  <button id="borrar-todo">Borrar todas las tareas</button>
+
+
+  <div id="lista-tareas"></div>
+
+
+<script src="app.js"></script>
 </body>
 </html>
