@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+  body {
+      background-color: #f3e5f5; /* violeta clarito */
+      font-family: sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+     h1 {
+      color: #6a1b9a;
+      margin-bottom: 15px;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    input, select, button {
+      padding: 10px;
+      margin: 5px;
+      font-size: 16px;
+    }
+
+    #lista-tareas {
+      max-width: 500px;
+      text-align: left;
+    }
+
+    #lista-tareas div {
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+   
+
+    #borrar-todo {
+      background-color: #ab47bc;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      text-align: center;
+      cursor: pointer;
+      width:250px;
+    }
+
+    #borrar-todo:hover {
+      background-color: #9c27b0;
+    }
+
+    button {
+      cursor: pointer;
+    }
