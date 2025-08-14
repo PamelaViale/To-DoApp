@@ -16,15 +16,27 @@ const tareasGuardadas = localStorage.getItem("tareas")
     renderTareas()
   }
 
+  // Si hay categoría en la URL, filtramos
+  const params = new URLSearchParams(window.location.search)
+  const categoriaFiltrada = params.get("categoria")
+  if (categoriaFiltrada) {
+    renderTareas(categoriaFiltrada)
+    selectCategoria.value = categoriaFiltrada // para que aparezca seleccionada
+  } else {
+    renderTareas()
+  }
 
   form.addEventListener("submit", agregarALista)
   botonBorrarTodo.addEventListener("click", borrarTodas)
+  selectCategoria.addEventListener("change", () => {
+    filtrarPorCategoria(selectCategoria.value)
+  })
 }) // agrego un evento al dom para colocar el envío del formulario, carga el evento submit
 
 function agregarALista(e) { // unción de agregar a la lista de tareas
   e.preventDefault() // previene el envio automático de los datos
 
-  const texto = inputTarea.value.trim(); // guardo el valor del input 
+  const texto = inputTarea.value.trim() // guardo el valor del input 
   const categoria = selectCategoria.value // guardo el balor de la catagoria seleccionada pr el usuario
 
   if (!texto) {
@@ -77,3 +89,22 @@ function guardarTareasLocal() {
   localStorage.setItem("tareas", JSON.stringify(tareas))
   console.log("Guardado en localStorage:", tareas)
 } //guardo el array tareas en el local storage
+
+//  Filtrar por categoría, usando URLSearchParams 
+function filtrarPorCategoria(categoria) {
+  const url = new URL(window.location) // URL actual
+
+  if (categoria) {
+    url.searchParams.set("categoria", categoria)
+  } else {
+    url.searchParams.delete("categoria")
+  }
+
+window.history.pushState({}, "", url) // cambia la URL sin recargar
+  renderTareas(categoria)
+}
+
+
+
+//Local Storage (Clase 9)
+//URLSearchParams (Clase 10)
