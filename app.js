@@ -9,6 +9,14 @@ const botonBorrarTodo = $("#borrar-todo")
 let tareas = [] // lista de invitados
 
 document.addEventListener("DOMContentLoaded", function () {
+
+const tareasGuardadas = localStorage.getItem("tareas")
+  if (tareasGuardadas) {
+    tareas = JSON.parse(tareasGuardadas) // convierto de texto a array
+    renderTareas()
+  }
+
+
   form.addEventListener("submit", agregarALista)
   botonBorrarTodo.addEventListener("click", borrarTodas)
 }) // agrego un evento al dom para colocar el envío del formulario, carga el evento submit
@@ -31,17 +39,20 @@ function agregarALista(e) { // unción de agregar a la lista de tareas
   } // creo un objeto nuevo cada vez que agrego algo a la lista(por cada valor que ingresa el usuario)
 
   tareas.push(nuevaTarea) // lo guardo en el array vacío
+  guardarTareasLocal() // guardar cada vez que agrego
   renderTareas() // ejecuto mi funcion que guarda 
   form.reset() //restablece todos los campos del formulario a su valor inicial
 } 
 
 function borrarTodas() {
   tareas = []
+   guardarTareasLocal()
   renderTareas()
 }
 
 function eliminarTarea(id) { // para borrar cada tarea undividual uso el id de cada tarea
   tareas = tareas.filter(t => t.id !== id) // la condición es que esa tarea sea diferente al id que le paso. Me devulve todos excepto el que tenga ede id
+  guardarTareasLocal()
   renderTareas() // elimino con cada btn individual
 }  // elimino cada invitado
 
@@ -53,8 +64,16 @@ function renderTareas() { // muestro la lista de tareas, recorre la lista de tar
           <button type="button" onclick="eliminarTarea(${tarea.id})">Eliminar</button>
         </div>
       `
-    ) // muestra el contenido del array de tareas
+    ) .join("") // junto todo en un solo string
+
+    // muestra el contenido del array de tareas
    
 }
 
+// en esta función guardo los invitados, en una función separada.
+//con setItem guardo los datos
 
+function guardarTareasLocal() {
+  localStorage.setItem("tareas", JSON.stringify(tareas))
+  console.log("Guardado en localStorage:", tareas)
+} //guardo el array tareas en el local storage
